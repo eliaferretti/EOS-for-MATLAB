@@ -330,8 +330,186 @@ global pc Tc w
     B = beta*R*Tc(index)/pc(index); 
     phi = p*B/(R*T); 
     phi = exp(phi); 
-end 
+end
+function y = zetaVdWmix(T,p,x,state) 
+global pc Tc w 
+amix = 0;bmix = 0; 
+    R = 8.3144621; 
+    for i=1:length(x) 
+        a(i) = 0.421875*R^2*Tc(i)^2/pc(i); 
+        b(i) = 0.125*R*Tc(i)/pc(i); 
+    end 
   
+    for i=1:length(x) 
+        for j=1:length(x) 
+            amix = amix + x(i)*x(j)*(a(i)*a(j))^0.5; 
+            bmix = bmix + x(i)*x(j)*(b(i)+b(j))/2; 
+        end 
+    end 
+    A = amix*p/(R*T)^2; 
+    B = bmix*p/(R*T); 
+     
+    polinomio = [1 -1-B A -A*B]; 
+    z = roots(polinomio); %cerco le radici 
+    z = z(imag(z)==0); %elimino le radici immaginarie 
+    if state=='L' 
+        z = min(z); %z liquido  
+    else 
+        z = max(z); %z vapore 
+    end 
+    y = z; 
+end 
+
+function y = zetaRKmix(T,p,x,state) 
+global pc Tc w 
+amix = 0;bmix = 0; 
+    R = 8.3144621; 
+    for i=1:length(x) 
+        Tr(i) = T/Tc(i); 
+        k(i) = 1/Tr(i)^0.5; 
+        a(i) = 0.42748*R^2*Tc(i)^2*k(i)/pc(i); 
+        b(i) = 0.08664*R*Tc(i)/pc(i); 
+    end 
+  
+    for i=1:length(x) 
+        for j=1:length(x) 
+            amix = amix + x(i)*x(j)*(a(i)*a(j))^0.5; 
+            bmix = bmix + x(i)*x(j)*(b(i)+b(j))/2; 
+        end 
+    end 
+    A = amix*p/(R*T)^2; 
+    B = bmix*p/(R*T); 
+     
+    polinomio = [1 -1 A-B-B^2 -A*B]; 
+    z = roots(polinomio); %cerco le radici 
+    z = z(imag(z)==0); %elimino le radici immaginarie 
+    if state=='L' 
+        z = min(z); %z liquido  
+    else 
+        z = max(z); %z vapore 
+    end 
+    y = z;  
+end 
+function y = zetaRKSmix(T,p,x,state) 
+global pc Tc w 
+amix = 0;bmix = 0; 
+    R = 8.3144621; 
+    for i=1:length(x) 
+        S(i) = 0.48+1.574*w(i)-0.176*w(i)^2; 
+        Tr(i) = T/Tc(i); 
+        k(i) = (1+S(i)*(1-Tr(i)^0.5))^2; 
+  
+        a(i) = 0.42748*R^2*Tc(i)^2*k(i)/pc(i); 
+        b(i) = 0.08664*R*Tc(i)/pc(i); 
+    end 
+  
+    for i=1:length(x) 
+        for j=1:length(x) 
+            amix = amix + x(i)*x(j)*(a(i)*a(j))^0.5; 
+            bmix = bmix + x(i)*x(j)*(b(i)+b(j))/2; 
+        end 
+    end 
+    A = amix*p/(R*T)^2; 
+    B = bmix*p/(R*T); 
+     
+    polinomio = [1 -1 A-B-B^2 -A*B]; 
+    z = roots(polinomio); %cerco le radici 
+    z = z(imag(z)==0); %elimino le radici immaginarie 
+    if state=='L' 
+        z = min(z); %z liquido  
+    else 
+        z = max(z); %z vapore 
+    end 
+    y = z;  
+end 
+function y = zetaPRmix(T,p,x,state) 
+global pc Tc w 
+amix = 0;bmix = 0; 
+    R = 8.3144621; 
+    for i=1:length(x) 
+        S(i) = 0.37464+1.54226*w(i)-0.26992*w(i)^2; 
+        Tr(i) = T/Tc(i); 
+        k(i) = (1+S(i)*(1-Tr(i)^0.5))^2; 
+  
+        a(i) = 0.45724*R^2*Tc(i)^2*k(i)/pc(i); 
+        b(i) = 0.0778*R*Tc(i)/pc(i); 
+    end 
+  
+    for i=1:length(x) 
+        for j=1:length(x) 
+            amix = amix + x(i)*x(j)*(a(i)*a(j))^0.5; 
+            bmix = bmix + x(i)*x(j)*(b(i)+b(j))/2; 
+        end 
+    end 
+    A = amix*p/(R*T)^2; 
+    B = bmix*p/(R*T); 
+     
+    polinomio = [1 -1+B A-2*B-3*B^2 -A*B+B^2+B^3]; 
+    z = roots(polinomio); %cerco le radici 
+    z = z(imag(z)==0); %elimino le radici immaginarie 
+    if state=='L' 
+        z = min(z); %z liquido  
+    else 
+        z = max(z); %z vapore 
+    end 
+    y = z;  
+end 
+function y = zetaVIRmix(Temp,press,x) 
+global pc Tc zc w 
+    R = 8.3144621; 
+    vc = R*Tc.*zc./pc; 
+%Z 
+    for i=1:length(Tc) 
+        for j=1:length(Tc) 
+            Z(i,j) = (zc(i)+zc(j))/2; 
+        end 
+    end 
+%V     
+    for i=1:length(Tc) 
+        for j=1:length(Tc) 
+            V(i,j) = ((vc(i)^(1/3)+vc(j)^(1/3))/2)^3; 
+        end 
+    end 
+%k - OKKIO KE NON SEMPRE C'E'   
+    for i=1:length(Tc) 
+        for j=1:length(Tc) 
+            k(i,j) = 1-(V(i,i)*V(j,j))^(1/2)/V(i,j); 
+        end 
+    end   
+%T 
+    for i=1:length(Tc) 
+        for j=1:length(Tc) 
+            T(i,j) = (Tc(i)*Tc(j))^(1/2)*(1-k(i,j)); 
+        end 
+    end 
+%P 
+    for i=1:length(Tc) 
+        for j=1:length(Tc) 
+            P(i,j) = Z(i,j)*R*T(i,j)/V(i,j); 
+        end 
+    end 
+%W 
+    for i=1:length(Tc) 
+        for j=1:length(Tc) 
+            W(i,j) = (w(i)+w(j))/2; 
+        end 
+    end 
+    TR = Temp./T; 
+    pR = press./P; 
+     
+    B0 = 0.083 - 0.422*TR.^(-1.6); 
+    B1 = 0.139 - 0.172*TR.^(-4.2); 
+    beta1 = B0 + B1.*W; 
+    beta1 = beta1.*pR./TR; 
+    beta = 0; 
+    for i=1:length(Tc) 
+        for j=1:length(Tc) 
+            beta = beta + x(i)*x(j)*beta1(i,j); 
+        end 
+    end 
+    z = 1 + beta; 
+    y = z;  
+end  
 function hr = hrVdWmix(T,p,x,state) 
 global pc Tc w 
 amix = 0;bmix = 0; 
