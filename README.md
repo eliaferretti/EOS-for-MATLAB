@@ -3,9 +3,9 @@ Libreria estesa contenente funzioni per il calcolo di grandezze termodinamiche c
 
 Prerequisiti EoS 
 Dichiarare globali le variabili: 
-		-  Tc = Vettore delle temperature critiche [K] 
-		-  pc = Vettore delle pressioni critiche [Pa] 
-		-  w = Vettore dei fattori acentrici di Pitzer [-] 
+		-  Tc = Vettore delle temperature critiche [K]; 
+		-  pc = Vettore delle pressioni critiche [Pa]; 
+		-  w = Vettore dei fattori acentrici di Pitzer [-]; 
 
 Prerequisiti gamma di Wilson 
 Dichiarare globale la matrice dei coefficienti di Wilson con il nome “W” (doppia vu maiuscola)
