@@ -27,3 +27,6 @@ Note
 		-  Le funzioni sfruttano le unità di misura del Sistema Internazionale 
 		-  Tutte le funzioni sono state testate sui risultati numerici di esercizi proposti nel testo: 
 			“Fondamenti di Termodinamica dell’Ingegneria Chimica” – R.Rota 
+
+
+Per qualsiasi problema o bug si contatti lo sviluppatore all'indirizzo: eliaferretti@outlook.it
