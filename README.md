@@ -26,7 +26,10 @@ Note sui termini di output
 Note 
 		-  Le funzioni sfruttano le unità di misura del Sistema Internazionale 
 		-  Tutte le funzioni sono state testate sui risultati numerici di esercizi proposti nel testo: 
-			“Fondamenti di Termodinamica dell’Ingegneria Chimica” – R.Rota 
+		   “Fondamenti di Termodinamica dell’Ingegneria Chimica” – R.Rota 
 
+Sono presenti i file .mltbx (add-on matlab) questi possono essere installati direttamente nell'ambiente si sviluppo.
+Nel caso si installi l'add-on "EOS_noGlobal" non sussistono più i prerequisiti elencati in precedenza.
+Tali grandezze andranno fornite alle funzioni ad ogni chiamata.
 
 Per qualsiasi problema o bug si contatti lo sviluppatore all'indirizzo: eliaferretti@outlook.it
