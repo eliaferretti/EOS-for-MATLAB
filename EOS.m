@@ -1,3 +1,15 @@
+%
+%  ______ ____   _____    _  _      __  __       _______ _               ____  
+% |  ____/ __ \ / ____|  | || |    |  \/  |   /\|__   __| |        /\   |  _ \ 
+% | |__ | |  | | (___    | || |_   | \  / |  /  \  | |  | |       /  \  | |_) |
+% |  __|| |  | |\___ \   |__   _|  | |\/| | / /\ \ | |  | |      / /\ \ |  _ < 
+% | |___| |__| |____) |     | |    | |  | |/ ____ \| |  | |____ / ____ \| |_) |
+% |______\____/|_____/      |_|    |_|  |_/_/    \_\_|  |______/_/    \_\____/ 
+%                                                                              
+%                                                                              
+%------------------------------------------------------------------------------------------
+%
+%
 %	Politecnico di Milano (2022)
 %
 %	Bachelor's degree in chemical engineering
@@ -10,7 +22,8 @@
 %	No warranty of fitness for a particular purpose is offered
 %	The user must assume the entire risk of using this code
 %
-%------------------------------------------------------------------------------------------------------------
+%
+%------------------------------------------------------------------------------------------
 
 
 
@@ -216,8 +229,7 @@ global pc Tc w
     else 
         z = max(z); %z vapore 
     end 
-    hr = z-1-A*(1+S*Tr^0.5/(1+S*(1-Tr^0.5)))*log((z+B*(1+2^0.5))/(z+B*(1-
-2^0.5)))/(2^1.5*B); 
+    hr = z-1-A*(1+S*Tr^0.5/(1+S*(1-Tr^0.5)))*log((z+B*(1+2^0.5))/(z+B*(1-2^0.5)))/(2^1.5*B); 
     hr = hr*R*T; 
 end 
 function hr = hrVIR(index,T,p) 
@@ -330,7 +342,8 @@ global pc Tc w
     B = beta*R*Tc(index)/pc(index); 
     phi = p*B/(R*T); 
     phi = exp(phi); 
-end
+end 
+
 function y = zetaVdWmix(T,p,x,state) 
 global pc Tc w 
 amix = 0;bmix = 0; 
@@ -359,7 +372,6 @@ amix = 0;bmix = 0;
     end 
     y = z; 
 end 
-
 function y = zetaRKmix(T,p,x,state) 
 global pc Tc w 
 amix = 0;bmix = 0; 
@@ -509,7 +521,8 @@ global pc Tc zc w
     end 
     z = 1 + beta; 
     y = z;  
-end  
+end   
+
 function hr = hrVdWmix(T,p,x,state) 
 global pc Tc w 
 amix = 0;bmix = 0; 
@@ -845,8 +858,7 @@ amix = 0;bmix = 0;
     else 
         z = max(z); %z vapore 
     end 
-    phi = Bi*(z-1)/B+A*(Bi/B-2*(Ai/A)^0.5)*log((z+B*(1+2^0.5))/(z+B*(1-
-2^0.5)))/(2^1.5*B)-log(z-B); 
+    phi = Bi*(z-1)/B+A*(Bi/B-2*(Ai/A)^0.5)*log((z+B*(1+2^0.5))/(z+B*(1-2^0.5)))/(2^1.5*B)-log(z-B); 
     phi = exp(phi); 
 end 
 %OCCHIO A Kij 
@@ -917,7 +929,7 @@ global pc Tc w
 end 
   
 %WILSON 
-function y=gamma(i,x) 
+function y=gammaWilson(i,x) 
 global W 
         beta = 0; 
         delta = 0; 
