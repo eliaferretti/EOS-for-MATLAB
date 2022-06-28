@@ -28,7 +28,7 @@ Note
 		-  Tutte le funzioni sono state testate sui risultati numerici di esercizi proposti nel testo: 
 		   “Fondamenti di Termodinamica dell’Ingegneria Chimica” – R.Rota 
 
-Sono presenti i file .mltbx (add-on matlab) questi possono essere installati direttamente nell'ambiente si sviluppo.
+Sono presenti i file .mltbx (add-on matlab) questi possono essere installati direttamente nell'ambiente di sviluppo.
 Nel caso si installi l'add-on "EOS_noGlobal" non sussistono più i prerequisiti elencati in precedenza.
 Tali grandezze andranno fornite alle funzioni ad ogni chiamata.
 
